@@ -1,0 +1,6 @@
+﻿@model List<contosoUniversity2020.Services.NewsItem>
+@foreach (var item in Model)
+{
+    //Fictional link here for demo purposes
+    <li><a asp-action="Index" asp-route-id ="@item.Id">@item.Title</a></li>
+}

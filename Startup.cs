@@ -12,6 +12,7 @@ using contosoUniversity2020.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using contosoUniversity2020.Services;
 
 namespace contosoUniversity2020
 {
@@ -49,9 +50,10 @@ namespace contosoUniversity2020
             services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddDefaultUI() //for routing identity pages (razoe pages, not mvc)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
-                
                 .AddDefaultTokenProviders(); //for email confirmation tokens
 
+             //mwilliams: Part 15: - Register the NewsService using Dependency Injection
+              services.AddTransient<INewsService, NewsService>();
               
               services.AddControllersWithViews();
               services.AddRazorPages();

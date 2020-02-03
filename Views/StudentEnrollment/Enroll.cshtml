@@ -1,0 +1,53 @@
+﻿@model contosoUniversity2020.Models.Course
+@*
+    ViewData["Title"] = "Enroll";
+*@
+
+    <h2>Enroll</h2>
+    @*Check for Model Errors: like when student is trying to enroll in already enrolled course*@
+    @if (!ViewData.ModelState.IsValid)
+    {
+        //We have an error - display it
+        <div class="alert alert-danger" role="alert">
+            @Html.ValidationMessage("AlreadyEnrolled")
+        </div>
+    }
+    else
+    {
+    <div class="row">
+    <div class="col-md-4">
+        <form asp-action="Enroll">
+            @*need to know which student - use hidden field *@
+            <input type="hidden" name="StudentID"
+                   id="StudentID" value="@ViewData["StudentID"]" />
+
+            <input type="hidden" asp-for="CourseID" />
+            @* show the course title*@
+            <div class="form-group">
+                <label style="font-weight=bold" class="control-panel">Selected Course:</label>
+                <span>@Html.DisplayFor(m => m.CourseIdTitle)</span>
+                <span>@Model.Credits  credits</span>
+            </div>
+
+            <div class="card bg-light mb-3" style="max-width: 18rem;">
+                <div class="card-header bg-dark text-light">Selected Course</div>
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Credits</h5>
+                    <p class="card-text">@Html.DisplayFor(m => m.CourseIdTitle)</p>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Enroll"
+                       class="btn-btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+    }
+
+    
+    <div>
+        <a asp-action="Index">Back to Course List</a>
+    </div>
